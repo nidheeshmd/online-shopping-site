@@ -22,7 +22,7 @@ function App() {
   so we put exact propery as true, so any wrong spelling in the address it will not show
   any other pages. In other words show 404 page
 
-  <Switch></Switch>
+  <Switch>to be continue</Switch>
 
   the moment switch find the match, it show that page and omit other pages
   for example path='/' & path='/hats' this will show the home page insted of 
