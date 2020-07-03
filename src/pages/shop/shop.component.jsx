@@ -22,7 +22,7 @@ class ShopPage extends Component{
                     <CollectionPreview key={id} {...otherCollectionProps}></CollectionPreview>
                 ))
             }
-        </div>   
+        </div>
         );
     }
 }
