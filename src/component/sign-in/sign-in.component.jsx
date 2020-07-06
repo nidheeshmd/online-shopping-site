@@ -6,6 +6,8 @@ import CustomButton from '../custome-button/custom-button.component';
 import { signInWithGoogle} from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
+//import { useHistory } from 'react-router-dom';
+import { auth } from 'firebase';
 
 class SignIn extends Component {
     constructor(props) {
@@ -17,9 +19,18 @@ class SignIn extends Component {
         }
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
-        this.setState({ email: '', password: '' });
+        
+        const {email , password } = this.state;
+        try{
+            await auth.signInWithEmailAndPassword(email, password);
+            this.setState({ email: '', password: '' });
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
     };
 
     handleChange = (event) => {
@@ -36,8 +47,8 @@ class SignIn extends Component {
                 <h2>I have already an account</h2>
                 <span>sign in with your email and password</span>
                 <form name='email' onSubmit={this.handleSubmit}>
-                    <FormInput name='email' type='email' value={this.state.email} required handleChange={this.handleChange} label='email' />
-                    <FormInput name='password' type='password' value={this.state.password} required handleChange={this.handleChange} label='password'/>
+                    <FormInput name='email' type='email' value={this.state.email} required handleChange={this.handleChange} label='Email' />
+                    <FormInput name='password' type='password' value={this.state.password} required handleChange={this.handleChange} label='Password'/>
                     <div className='buttons'>
                         <CustomButton type='submit'>SIGN IN</CustomButton>
                         <CustomButton onClick={signInWithGoogle} isGoogleSignIn={true}>SIGN IN WITH GOOGLE</CustomButton>
