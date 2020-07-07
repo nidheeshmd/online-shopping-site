@@ -1,6 +1,9 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
-import {auth} from '../../firebase/firebase.utils';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './header.styles.scss';
 
@@ -20,8 +23,15 @@ const Header =  ({currentUser}) => (
                 :
                 <Link className='option' to='/signin'>SIGN IN</Link>
             }
+            <CartIcon/>
         </div>
+        <CartDropdown />
     </div>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Header);
+//connect is higher level function and have 2 arguments. passing value to current user of this component from redux
