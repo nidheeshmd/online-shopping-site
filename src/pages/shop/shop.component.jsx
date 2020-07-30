@@ -1,7 +1,8 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+
 import CollectionsOverview from  '../../component/collections-overview/collections-overview.component';
-
-
+import CollectionPage from '../collection/collection.component';
 
 /*class ShopPage extends Component{
     constructor(props){
@@ -26,12 +27,13 @@ import CollectionsOverview from  '../../component/collections-overview/collectio
     }
 }*/
 
-const ShopPageComponent = () =>(
+const ShopPage = ({match}) =>{
+    console.log(match);
+    return(
     <div className='shop-page'>
-            <CollectionsOverview/>
-        </div>
-);
+        <Route exact path={`${match.path}`} component={CollectionsOverview}/>
+        <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+        </div>);
+};
 
-
-
-export default ShopPageComponent;
+export default ShopPage;
