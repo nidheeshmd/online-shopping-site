@@ -19,10 +19,10 @@ createSelector(
    /* [selectCollections],
     collections => collections.find(collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam])*/
     [selectCollections],
-    collections => collections[collectionUrlParam]
+    collections => ( collections ? collections[collectionUrlParam] : null)
 );
 
 export const selectCollectionsForPreview = createSelector(
-    [selectCollections],  collections => Object.keys(collections).map(key => collections[key])
+    [selectCollections],  collections => collections ? Object.keys(collections).map(key => collections[key]) : []
     //'keys' used to convert object to array. then map the array to fetch all the data from array.
 )
